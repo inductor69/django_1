@@ -1,0 +1,85 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'rate/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'rate/jk.css' %}">
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="content">
+    <br>
+    <br><br><br>
+    
+    {% if user.is_authenticated %}
+    <a href="/logout">logout</a>
+    <p>hello ,{{user.first_name}}</p>
+{% else %}
+    <li><a href="/login">login</a></li>
+    <li><a href="/register">Register</a></li>
+    <p>hello</p>
+{%endif%}
+<br>
+<br>
+<br>
+<br>
+    <div class="itemconfiguration " style="padding-left: 40px;">
+        {% for i in posts %}
+        <div class="card lol" style="width: 18rem;border: 2px solid blue;">
+            {{i.user.username}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;{{i.text}}
+            <br>
+            <p style="font-size: smaller;">{{i.post_date}}</p>
+            <br>
+        </div>
+        <br>
+        {% endfor %}
+    
+        
+        
+      </div>
+
+      <br>
+      <br>
+      <br>
+      
+      {% if user.is_authenticated %}
+      <div class="row" style="padding-left: 40px;">
+          <h2>Post</h2>
+        <form action="" method="POST">
+            {% csrf_token%}
+            
+            
+            <li><textarea name="1" rows="5" cols="100" placeholder="comments" ></textarea></li>
+            <li><input type="Submit"></li>
+           
+
+            
+        </form>
+    </div>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <footer>
+        <li><a href="{%url 'course' %}"> all courses</a></li>
+        <li><a href="{%url 'prof_info' %}">all professors</a> </li>
+        <li><a href="{%url 'index' %}">main page</a></li>
+        <li><a href="{%url 'complaints' %}">complaints</a></li>
+        <li><a href="{% url 'forum'%}">forum</a></li>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    
+        </footer>
+    
+    
+</div>
+</body>
+</html>

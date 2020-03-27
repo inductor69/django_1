@@ -1,0 +1,97 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'rate/bootstrap.min.css' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="content">
+    <br>
+    <br><br><br>
+    {% if user.is_authenticated %}
+    <a href="/logout">logout</a>
+    <p>hello ,{{user.first_name}}</p>
+{% else %}
+    <li><a href="/login">login</a></li>
+    <li><a href="/register">Register</a></li>
+    <p>hello</p>
+{%endif%}
+<br>
+<br>
+<br>
+<br>
+    <div class="">
+    
+        <h2>{{a.course_id}}</h2>
+        <p>Course Description : &nbsp;&nbsp;{{a.course_description}}</p>
+        <p>Course Department : &nbsp;&nbsp;{{a.course_department}}</p>
+        <h3>Taught By</h3>
+        {% for i in b%}
+        <p>{{i.professor.prof_name}}</p>
+        {%endfor%}
+
+        <p>Course Difficulty : &nbsp;&nbsp;{{d.course_difficulty_own__avg}}</p>
+        <p>Course Workload : &nbsp;&nbsp;{{e.course_workload_own__avg}}</p>
+        <p>Course Content : &nbsp;&nbsp;{{f.course_content_rating_own__avg}}</p>
+        <h2>Course Reviews</h2>
+        {% for r in y%}
+        <div class="card">
+        <p>{{r.id}}</p>
+        <p>{{r.course_review_own}}</p>
+       
+        </div>
+        {% endfor %}
+        <p></p>
+        
+        
+      </div>
+      {% if user.is_authenticated %}
+      <h1>Your Ratings and Reviews</h1>
+      <p>{{cond.course_difficulty_own}}</p>
+      <p>{{cond.course_workload_own}}</p>
+    
+      <p>{{cond.course_content_rating_own}}</p>
+      
+      <p>{{k.course_review_own}}</p>
+
+      <div>
+          <h2>Enter the details</h2>
+        <form action="" method="POST">
+            {% csrf_token%}
+            <li><input type="number" name="1" placeholder="course_difficulty" value="{{cond.course_difficulty_own}}"></li>
+            <li><input type="number" name="2" placeholder="course_content_rating" value="{{cond.course_workload_own}}"></li>
+            <li><input type="number" name="3" placeholder="course_workload" value="{{cond.course_content_rating_own}}"></li>
+            
+            <li><textarea name="7" rows="15" cols="30" placeholder="your review here" >{{k.course_review_own}}</textarea></li>
+            <li><input type="Submit"></li>
+           
+
+            
+        </form>
+    </div>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <footer>
+    <li><a href="{%url 'course' %}"> all courses</a></li>
+    <li><a href="{%url 'prof_info' %}">all professors</a> </li>
+    <li><a href="{%url 'index' %}">main page</a></li>
+    <li><a href="{%url 'complaints' %}">complaints</a></li>
+    <li><a href="{% url 'forum'%}">forum</a></li>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    </footer>
+    
+</div>
+</body>
+</html>

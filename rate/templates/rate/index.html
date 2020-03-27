@@ -1,0 +1,53 @@
+
+{% if user.is_authenticated %}
+    <a href="/logout">logout</a>
+    <p>hello ,{{user.first_name}}</p>
+    <br>
+    <br><br>
+    <br>
+    <br>
+    <p>Professors reviewed</p>
+    {% for i in a %}
+        <li>{{i.prof_own.prof_name}}</li>
+        {% endfor %}
+        <br>
+        <br>
+        <br>
+        <br>
+        <p>Courses reviewed</p>
+    {% for j in b %}
+        <li>{{j.course_own.course_id}}</li>
+        {% endfor %}
+        <br>
+        <br>
+        <br>
+        <br>
+        <p>Courses Rated</p>
+        {% for k in c %}
+            <li>{{k.course_own.course_id}}</li>
+            {% endfor %}
+            <br>
+            <br>
+            <br>
+            <br>
+            <p>Professors Rated</p>
+            {% for l in d %}
+                <li>{{l.prof_own.prof_name}}</li>
+                {% endfor %}
+                <br>
+                <br>
+                <br>
+                <br>
+
+{% else %}
+    <li><a href="/login">login</a></li>
+    <li><a href="/register">Register</a></li>
+    <p>hello</p>
+{%endif%}
+
+
+
+<div><a href="{%url 'prof_info'%}">Professors</a></div>
+<div><a href="{% url 'course' %}">Courses</a></div>
+<div><a href="{% url 'complaints' %}"> Report a user</a></div>
+<li><a href="{% url 'forum'%}">forum</a></li>

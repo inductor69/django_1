@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br>
+    <br><br><br>
+    {% if user.is_authenticated %}
+    <a href="/logout">logout</a>
+    <p>hello ,{{user.first_name}}</p>
+{% else %}
+    <li><a href="/login">login</a></li>
+    <li><a href="/register">Register</a></li>
+    <p>hello</p>
+{%endif%}
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+    {% if user.is_authenticated %}
+    <form action="" method='POST'>
+        {% csrf_token%}
+
+        <input type="text" name="username" placeholder="username"><br>
+        <input type="text" name="complaint" placeholder="complaints against him"><br>
+        <input type="Submit">
+    </form>
+    {% else %}
+        <a href="{% url 'login' %}"><h3>Login First</h3></a>
+    {% endif %}
+
+    <div>{%for message in messages %}
+        <h3>{{message}}</h3>
+    {%endfor%}
+</div>
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <footer>
+    <li><a href="{%url 'course' %}"> all courses</a></li>
+    <li><a href="{%url 'prof_info' %}">all professors</a> </li>
+    <li><a href="{%url 'index' %}">main page</a></li>
+    <li><a href="{%url 'complaints' %}">complaints</a></li>
+    <li><a href="{% url 'forum'%}">forum</a></li>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+</html>

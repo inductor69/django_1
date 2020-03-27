@@ -1,0 +1,99 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'rate/bootstrap.min.css' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="content">
+    <br>
+    <br><br><br>
+    {% if user.is_authenticated %}
+    <a href="/logout">logout</a>
+    <p>hello ,{{user.first_name}}</p>
+{% else %}
+    <li><a href="/login">login</a></li>
+    <li><a href="/register">Register</a></li>
+    <p>hello</p>
+{%endif%}
+<br>
+<br>
+<br>
+<br>
+    <div class="">
+    
+        <h2>{{a.prof_name}}</h2>
+        
+        <p>Department : &nbsp;&nbsp;{{a.prof_deparment}}</p>
+        <p>Research Interest : &nbsp;&nbsp;{{a.prof_research_interest}}</p>
+        <h3>Courses Taught</h3>
+        {% for i in b%}
+        <p>{{i.subject.course_id}}</p>
+        {%endfor%}
+
+        <p>Grading Style : &nbsp;&nbsp;{{d.prof_grading_own__avg}}</p>
+        <p>Puntuality : &nbsp;&nbsp;{{e.prof_puntuality_own__avg}}</p>
+       
+        <p>Strictness : &nbsp;&nbsp;{{g.prof_strictness_rating_own__avg}}</p>
+        <p>Teaching : &nbsp;&nbsp;{{h.prof_teaching_skill_own__avg}}</p>
+        <p>Enthusiasm : &nbsp;&nbsp;{{i.prof_enthusiasm_own__avg}}</p>
+        <p>Overall : &nbsp;&nbsp;{{j.prof_overall_own__avg}}</p>
+        <h2>Some Reviews</h2>
+        {% for r in y%}
+        <p>{{r.prof_review_own}}</p>
+        {% endfor %}
+        <p></p>
+        
+        
+      </div>
+      {% if user.is_authenticated %}
+      <h1>Your Ratings and Reviews</h1>
+      <p>{{cond.prof_grading_own}}</p>
+      <p>{{cond.prof_puntuality_own}}</p>
+    
+      <p>{{cond.prof_strictness_rating_own}}</p>
+      <p>{{cond.prof_teaching_skill_own}}</p>
+      <p>{{cond.prof_enthusiasm_own}}</p>
+      <p>{{cond.prof_overall_own}}</p>
+      <p>{{k.prof_review_own}}</p>
+
+      <div>
+        <form action="" method="POST">
+            {% csrf_token%}
+            <li><input type="number" name="1" placeholder="prof_grading" value="{{cond.prof_grading_own}}"></li>
+            <li><input type="number" name="2" placeholder="prof_puntuality" value="{{cond.prof_puntuality_own}}"></li>
+            <li><input type="number" name="3" placeholder="prof_strictness" value="{{cond.prof_strictness_rating_own}}"></li>
+            <li><input type="number" name="4" placeholder="prof_teaching_skill" value="{{cond.prof_teaching_skill_own}}"></li>
+            <li><input type="number" name="5" placeholder="prof_enthusiasm" value="{{cond.prof_enthusiasm_own}}"></li>
+            <li><input type="number" name="6" placeholder="prof_overall" value="{{cond.prof_overall_own}}"></li>
+            <li><textarea name="7" rows="15" cols="30" placeholder="your review here">{{k.prof_review_own}}</textarea></li>
+            <li><input type="Submit"></li>
+           
+
+            
+        </form>
+    </div>
+    {%endif%}
+    
+</div>
+</body>
+</html>
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <footer>
+    <li><a href="{%url 'course' %}"> all courses</a></li>
+    <li><a href="{%url 'prof_info' %}">all professors</a> </li>
+    <li><a href="{%url 'index' %}">main page</a></li>
+    <li><a href="{%url 'complaints' %}">complaints</a></li>
+        <li><a href="{% url 'forum'%}">forum</a></li>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>

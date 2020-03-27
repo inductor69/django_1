@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Mail sent to your email id from kshitijgang76@zohomail.in</h2>
+    <h4>Please check your spam for the mail, if not found</h4>
+    <form action="" method='POST'>
+        {% csrf_token%}
+
+        <input type="text" name="1" placeholder="code_sent"><br>
+       
+        <input type="Submit">
+    </form>
+
+    <div>{%for message in messages %}
+        <h3>{{message}}</h3>
+    {%endfor%}
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+    <div>
+        <h1>Register</h1>
+
+    </div>
+    {% if user.is_authenticated %}
+    <div>
+        <form action="" method="POST">
+            {% csrf_token%}
+            <li><input type="email" name="username" placeholder="Enter IITD email"></li>
+            <li><input type="text" name="firstname" placeholder="first name"></li>
+            <li><input type="text" name="lastname" placeholder="last name"></li>
+            <li><input type="text" name="id" placeholder="eg. me1190807"></li>
+            <li><input type="text" name="department" placeholder="department"></li>
+            <li><input type="text" name="img_src" placeholder="photo link"></li>
+            <li><input type="password" name="password" placeholder="password"></li>
+            <li><input type="password" name="password1" placeholder="confirm password"></li>
+            <li><input type="Submit"></li>
+        </form>
+    </div>
+    <div>{%for message in messages %}
+        <h3>{{message}}</h3>
+    {%endfor%}
+    {% else %}
+    <p>Cannot register while logged in</p>
+
+    {% endif %}
+</div>
+</body>
+</html>
