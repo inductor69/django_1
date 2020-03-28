@@ -42,9 +42,19 @@
         <p>Enthusiasm : &nbsp;&nbsp;{{i.prof_enthusiasm_own__avg}}</p>
         <p>Overall : &nbsp;&nbsp;{{j.prof_overall_own__avg}}</p>
         <h2>Some Reviews</h2>
+
+        <div class="">
         {% for r in y%}
+        <div class="card">
+            {% if r.anonymous == False %}
+            <p>{{r.user.username}}</p>
+            {% else%}
+            <p>anonymous</p>
+            {% endif%}
         <p>{{r.prof_review_own}}</p>
+            </div>
         {% endfor %}
+        </div>
         <p></p>
         
         
@@ -63,12 +73,13 @@
       <div>
         <form action="" method="POST">
             {% csrf_token%}
-            <li><input type="number" name="1" placeholder="prof_grading" value="{{cond.prof_grading_own}}"></li>
-            <li><input type="number" name="2" placeholder="prof_puntuality" value="{{cond.prof_puntuality_own}}"></li>
-            <li><input type="number" name="3" placeholder="prof_strictness" value="{{cond.prof_strictness_rating_own}}"></li>
-            <li><input type="number" name="4" placeholder="prof_teaching_skill" value="{{cond.prof_teaching_skill_own}}"></li>
-            <li><input type="number" name="5" placeholder="prof_enthusiasm" value="{{cond.prof_enthusiasm_own}}"></li>
-            <li><input type="number" name="6" placeholder="prof_overall" value="{{cond.prof_overall_own}}"></li>
+            <li><input type="number" min='0' max="10" name="1" placeholder="prof_grading" value="{{cond.prof_grading_own}}"></li>
+            <li><input type="number" min='0' max="10" name="2" placeholder="prof_puntuality" value="{{cond.prof_puntuality_own}}"></li>
+            <li><input type="number" min='0' max="10" name="3" placeholder="prof_strictness" value="{{cond.prof_strictness_rating_own}}"></li>
+            <li><input type="number" min='0' max="10" name="4" placeholder="prof_teaching_skill" value="{{cond.prof_teaching_skill_own}}"></li>
+            <li><input type="number" min='0' max="10" name="5" placeholder="prof_enthusiasm" value="{{cond.prof_enthusiasm_own}}"></li>
+            <li><input type="number" min='0' max="10" name="6" placeholder="prof_overall" value="{{cond.prof_overall_own}}"></li>
+            <li><input type="checkbox" name="is_a" id="">Do you want to be is_anonymous?</li>
             <li><textarea name="7" rows="15" cols="30" placeholder="your review here">{{k.prof_review_own}}</textarea></li>
             <li><input type="Submit"></li>
            
@@ -92,6 +103,11 @@
     <li><a href="{%url 'index' %}">main page</a></li>
     <li><a href="{%url 'complaints' %}">complaints</a></li>
         <li><a href="{% url 'forum'%}">forum</a></li>
+        {% if user.is_authenticated %}
+
+        <li><a href="{% url 'mypage' %}">mypage</a></li>
+        {% endif %}
+                </footer>
     <br>
     <br>
     <br>

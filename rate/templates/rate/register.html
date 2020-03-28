@@ -11,6 +11,10 @@
 
     </div>
     {% if user.is_authenticated %}
+    <p>Cannot register while logged in</p>
+
+    
+    {% else %}
     <div>
         <form action="" method="POST">
             {% csrf_token%}
@@ -28,9 +32,7 @@
     <div>{%for message in messages %}
         <h3>{{message}}</h3>
     {%endfor%}
-    {% else %}
-    <p>Cannot register while logged in</p>
-
+    
     {% endif %}
 </div>
 </body>

@@ -101,3 +101,17 @@ class Forum_message(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='post_by')
     text=models.CharField(max_length=200)
     post_date=models.DateTimeField()
+
+
+
+
+class Message_to_the_user(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return(self.user.username)
+
+class Reportings(models.Model):
+    message=models.CharField(max_length=200)
+    to_user=models.ForeignKey(Message_to_the_user,on_delete=models.CASCADE)

@@ -84,6 +84,11 @@
     <li><a href="{%url 'index' %}">main page</a></li>
     <li><a href="{%url 'complaints' %}">complaints</a></li>
     <li><a href="{% url 'forum'%}">forum</a></li>
+    {% if user.is_authenticated %}
+
+        <li><a href="{% url 'mypage' %}"> mypage</a></li>
+        {% endif %}
+        </footer>
     <br>
     <br>
     <br>

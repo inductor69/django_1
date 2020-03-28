@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from .models import Professors,Courses,Employee,Prof_to_subj,ProfRating,ProfReview,CourseRating,CourseReview,Complaints,Liker,Forum_message
+from .models import Professors,Courses,Employee,Prof_to_subj,ProfRating,ProfReview,CourseRating,CourseReview,Complaints,Liker,Forum_message,Message_to_the_user,Reportings
 from django.contrib.auth.models import User, auth
 from .forms import LoginForm
 from django.db.models import Avg
@@ -73,7 +73,7 @@ def login(request):
                     messages.info(request, "you are blocked")
                     return redirect('login')
             auth.login(request, user)
-            return redirect('/')
+            return redirect('mypage')
         else:
             messages.info(request, "invalid credentials")
             return redirect('login')
@@ -82,14 +82,18 @@ def login(request):
 
 def register(request):
     if request.method=='POST':
-        username=request.POST['username']
-        firstname=request.POST['firstname']
-        lastname=request.POST['lastname']
-        id_=request.POST['id']
-        department=request.POST['department']
-        img_src=request.POST['img_src']
-        password=request.POST['password']
-        password_repeat=request.POST['password1']
+        try:
+            username=request.POST['username']
+            firstname=request.POST['firstname']
+            lastname=request.POST['lastname']
+            id_=request.POST['id']
+            department=request.POST['department']
+            img_src=request.POST['img_src']
+            password=request.POST['password']
+            password_repeat=request.POST['password1']
+        except:
+            messages.info(request, 'some error with filling the form')
+            return redirect('register')
         if password != password_repeat :
             messages.info(request, 'password not same')
             return redirect('register')
@@ -148,19 +152,40 @@ def logout(request):
 
 
 def index(request):
+    
+    
+    return render(request, 'rate/first.html')
+
+def my_page(request):
     user=request.user
-    print(user)
-    if user == 'AnonymousUser':
-        prof_review=ProfReview.objects.filter(user=user)
-        course_review=CourseReview.objects.filter(user=user)
-        course_rating=CourseRating.objects.filter(user=user)
-        prof_rating=ProfRating.objects.filter(user=user)
-    else:
+    prof_review=ProfReview.objects.filter(user=user)
+    course_review=CourseReview.objects.filter(user=user)
+    course_rating=CourseRating.objects.filter(user=user)
+    prof_rating=ProfRating.objects.filter(user=user)
+    rmessages=Reportings.objects.filter(to_user__user=user)
+    try:
+        r=prof_review[0]
+    except:
         prof_review=[None]
-        course_review=[None]
-        course_rating=[None]
+    try:
+        r=prof_rating[0]
+    except:
         prof_rating=[None]
-    return render(request, 'rate/index.html',{'a':prof_review, 'b':course_review, 'c':course_rating, 'd':prof_rating})
+    try:
+        r=course_review[0]
+    except:
+        course_review=[None]
+    try:
+        r=course_rating[0]
+    except:
+        course_rating=[None]
+    try:
+        r=rmessages[0]
+    except:
+        rmessages=[None]
+    return render(request, 'rate/index.html',{'a':prof_review, 'b':course_review, 'c':course_rating, 'd':prof_rating,'e':rmessages})
+
+
 
 def prof(request):
     if request.method=="POST":
@@ -214,6 +239,16 @@ def detail(request,prof_name):
         six=request.POST['6']
         seven=request.POST['7']
         print(seven)
+        try:
+            eight=request.POST['is_a']
+        except:
+            eight=False
+
+        print(eight)
+        if eight == 'on':
+            eight=True
+        else:
+            eight=False
 
         check=ProfRating.objects.filter(prof_own__prof_name=prof_name,user__username=user.username)
         if check:
@@ -241,11 +276,11 @@ def detail(request,prof_name):
             if check_1:
                 prof_own=check_1[0].prof_own
                 check_1[0].delete()
-                review=ProfReview.objects.create(user=user,prof_own=prof_own,prof_review_own=seven)
+                review=ProfReview.objects.create(user=user,prof_own=prof_own,prof_review_own=seven,anonymous=eight)
                 review.save()
             else:
                 prof_own=Professors.objects.get(prof_name=prof_name)
-                review=ProfReview.objects.create(user=user,prof_own=prof_own,prof_review_own=seven)
+                review=ProfReview.objects.create(user=user,prof_own=prof_own,prof_review_own=seven,anonymous=eight)
                 review.save()
 
 
