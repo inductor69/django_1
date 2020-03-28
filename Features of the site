@@ -1,0 +1,9 @@
+1. The site verifies if you have entered a proper usable email,by sending a verifying code to it,also it checks if your entry no. has proper parameters like branch code,or the year,or your email has keyword 'iitd' in it.
+2.There is a forum where you can post possible doubts.You can add a functionality to search them(which I did not think of adding then).
+3.Admin can block a user for a certain amount of time.
+4.The users can send a complaint regarding a review,any content or adding new professors or courses.
+5.You can search professors by their reaearch interests also.
+6.You can search courses according to their descripyion or content.
+7.Users's home page shows all his ratings and reviews.
+8.Admin can send user a warning or appreciation for his work.
+ 
