@@ -1,0 +1,6 @@
+2)
+A nosql database system,
+as search,updation,delete and other simple queries are faster,
+Also there will perhaps only be at max two to three tables,so we can easily define schema ourselves easily and more conveniently.
+As data security and validity are of minimal importance,the biggest drawback that nosql database systems do not comply to ACID principles is a minimal drawback,
+compared to the increase in speed and performance.
