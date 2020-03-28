@@ -37,6 +37,47 @@
     {%endfor%}
 </div>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <li><input type="text" name='1' placeholder="search based on id and Description">&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type='Submit' name="" id=""></li>
+  </form>
+  {% if search %}
+    <h2>Search results</h2>
+    <div class="d-flex justify-content-around">
+      <br>
+    {% for j in b%}
+    <div class="card" style="width: 18rem;border: 2px solid blue;">
+        
+        <div class="card-body">
+          <h5 class="card-title">{{j.course_id}}</h5>
+          <p class="card-text">Department: {{j.course_department}}</p>
+          <p class="card-text">Course Description<br>: {{j.course_description}}</p>
+          <a href="{{j.course_id}}" class="btn btn-primary">More</a>
+        </div>
+      </div>
+    {%endfor%}
+    {% for k in c%}
+    <div class="card" style="width: 18rem;border: 2px solid blue;">
+        
+        <div class="card-body">
+          <h5 class="card-title">{{k.course_id}}</h5>
+          <p class="card-text">Department: {{k.course_department}}</p>
+          <p class="card-text">Course Description<br>: {{k.course_description}}</p>
+          <a href="{{k.course_id}}" class="btn btn-primary">More</a>
+        </div>
+      </div>
+    {%endfor%}
+  </div>
+    {% endif %}
+</div>
+<br>
     <br>
     <br>
     <br>

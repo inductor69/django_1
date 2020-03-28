@@ -35,6 +35,44 @@
         </div>
       </div>
     {%endfor%}
+  </div>
+    <br><br><br><br><br><br><br>
+    <div>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <li><input type="text" name='1' placeholder="search based on name and research">&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type='Submit' name="" id="" value="search"></li>
+      </form>
+      {% if search %}
+        <h2>Search results</h2>
+        <div class="d-flex justify-content-around">
+          <br>
+        {% for j in b%}
+        <div class="card" style="width: 18rem;border: 2px solid blue;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/VES_Awards_89_cropped.jpg" class="card-img-top" alt="">
+            <div class="card-body">
+              <h5 class="card-title">{{j.prof_name}}</h5>
+              <p class="card-text">Department: {{j.prof_deparment}}</p>
+              <p class="card-text">Research<br>: {{j.prof_research_interest}}</p>
+              <a href="{{j.prof_name}}" class="btn btn-primary">More</a>
+            </div>
+          </div>
+        {%endfor%}
+        {% for k in c%}
+        <div class="card" style="width: 18rem;border: 2px solid blue;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/VES_Awards_89_cropped.jpg" class="card-img-top" alt="">
+            <div class="card-body">
+              <h5 class="card-title">{{k.prof_name}}</h5>
+              <p class="card-text">Department: {{k.prof_deparment}}</p>
+              <p class="card-text">Research<br>: {{k.prof_research_interest}}</p>
+              <a href="{{k.prof_name}}" class="btn btn-primary">More</a>
+            </div>
+          </div>
+        {%endfor%}
+        
+      </div>
+        {% endif %}
+    </div>
     <br>
     <br>
     <br>
@@ -51,6 +89,6 @@
     <br>
     <br>
     <br>
-</div>
+
 </body>
 </html>

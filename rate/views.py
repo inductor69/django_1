@@ -163,19 +163,42 @@ def index(request):
     return render(request, 'rate/index.html',{'a':prof_review, 'b':course_review, 'c':course_rating, 'd':prof_rating})
 
 def prof(request):
+    if request.method=="POST":
+        prof=request.POST['1']
+        all_course=Professors.objects.filter(prof_name__contains=prof)
+        all_course_1=Professors.objects.filter(prof_research_interest__contains=prof)
+    
+    
+        search=True
+    else:
+        all_course=[None]
+        all_course_1=[None]
+        search=False
     all_prof=Professors.objects.all()
     a=[]
     for prof in all_prof:
         a.append(prof)
-    return render(request, 'rate/profInfo.html',{'a':a})
+    return render(request, 'rate/profInfo.html',{'a':a,'search':search,'b':all_course,'c':all_course_1})
 
 def course(request,):
+    if request.method=="POST":
+        course=request.POST['1']
+        all_course=Courses.objects.filter(course_id__contains=course)
+        all_course_1=Courses.objects.filter(course_description__contains=course)
+        
+    
+        search=True
+    else:
+        all_course=[None]
+        all_course_1=[None]
+        search=False
+        
     course_info=Courses.objects.all()
     a=[]
     for prof in course_info:
         a.append(prof)
     
-    return render(request, 'rate/course.html',{'a':a})
+    return render(request, 'rate/course.html',{'a':a,'search':search,'b':all_course,'c':all_course_1})
 
 
         
